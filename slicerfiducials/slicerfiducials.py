@@ -218,7 +218,7 @@ class SlicerFiducials(object):
         """
         physical = self.fiducialToPhysical[name]
         if space == Space.INDEX:
-            assert self.image not None
+            assert self.image is not None
             return np.array(
                 self.image.TransformPhysicalPointToContinuousIndex(physical)
             )
