@@ -1,2 +1,3 @@
-# slicer-fiducials
-A package for slicer fiducial manipulation and analysis.
+# Slicer Fiducials Package
+
+This is a small package for slicer fiducial manipulation and analysis.
