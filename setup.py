@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="slicerfiducials",
-    version="0.1.0",
+    version="0.1.1",
     author="abpwrs & ArjitJ",
     author_email="alexander-powers@uiowa.edu",
     description="A small package for slicer fiducial manipulation and analysis.",
