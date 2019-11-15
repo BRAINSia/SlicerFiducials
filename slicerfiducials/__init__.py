@@ -1,2 +1,2 @@
-from SlicerFiducials import SlicerFiducials
-from enums import Space, Format
+from slicerfiducials.slicerfiducials import SlicerFiducials
+from slicerfiducials.enums import Space, Format

@@ -129,7 +129,7 @@ class SlicerFiducials(object):
         return iter(self.fiducialToPhysical.items())
 
     @staticmethod
-    def diff_files(file1: SlicerFiducials, file2: SlicerFiducials) -> SlicerFiducials:
+    def diff_files(file1, file2):
         """
         :param file1: SlicerFiducials
         :param file2: SlicerFiducials
