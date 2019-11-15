@@ -69,7 +69,7 @@ class SlicerFiducials(object):
             self.df.columns = ["label", "x", "y", "z", "sel", "vis"]
 
         elif self.df.shape[1] == 14:
-            self.format = format.ORIGINAL_MARKUP
+            self.format = Format.ORIGINAL_MARKUP
             self.df.columns = [
                 "id",
                 "x",
