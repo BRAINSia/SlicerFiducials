@@ -209,7 +209,7 @@ class SlicerFiducials(object):
         dfToReturn.index = dfToReturn["label"]
         return dfToReturn.reindex(labels=self.indices)
 
-    def query(self, name: str, space: str = "physical") -> np.ndarray:
+    def query(self, name: str, space: Space = Space.PHYSICAL) -> np.ndarray:
         """
         query for single landmark point using label. by default in physical space
         :param name: label of the landmark point
@@ -217,8 +217,8 @@ class SlicerFiducials(object):
         :return:
         """
         physical = self.fiducialToPhysical[name]
-        if space == "index":
-            assert self.image_path is not None
+        if space == Space.INDEX:
+            assert self.image not None
             return np.array(
                 self.image.TransformPhysicalPointToContinuousIndex(physical)
             )
