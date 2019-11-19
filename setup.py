@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="slicerfiducials",
-    version="0.1.1",
+    version="0.1.4",
     author="abpwrs & ArjitJ",
     author_email="alexander-powers@uiowa.edu",
     description="A small package for slicer fiducial manipulation and analysis.",
@@ -18,8 +18,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=[
-          'itk','pandas','numpy',
-      ],
+    install_requires=["itk", "pandas", "numpy",],
     python_requires=">=3.6",
 )

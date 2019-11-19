@@ -69,7 +69,7 @@ class SlicerFiducials(object):
             self.df.columns = ["label", "x", "y", "z", "sel", "vis"]
 
         elif self.df.shape[1] == 14:
-            self.format = format.ORIGINAL_MARKUP
+            self.format = Format.ORIGINAL_MARKUP
             self.df.columns = [
                 "id",
                 "x",
@@ -209,7 +209,7 @@ class SlicerFiducials(object):
         dfToReturn.index = dfToReturn["label"]
         return dfToReturn.reindex(labels=self.indices)
 
-    def query(self, name: str, space: str = "physical") -> np.ndarray:
+    def query(self, name: str, space: Space = Space.PHYSICAL) -> np.ndarray:
         """
         query for single landmark point using label. by default in physical space
         :param name: label of the landmark point
@@ -217,8 +217,8 @@ class SlicerFiducials(object):
         :return:
         """
         physical = self.fiducialToPhysical[name]
-        if space == "index":
-            assert self.image_path is not None
+        if space == Space.INDEX:
+            assert self.image is not None
             return np.array(
                 self.image.TransformPhysicalPointToContinuousIndex(physical)
             )
@@ -258,17 +258,17 @@ class SlicerFiducials(object):
         except AssertionError as e:
             raise TypeError("sitk_transform must implement the TransformPoint method.")
         if inplace:
-            for name in self.names():
-                point = self.query(name)
-                transformed_point = sitk_transform.TransformPoint(point)
-                self.set(name, np.array(transformed_point))
+            write_to = self
         else:
-            fiducials_to_return = deepcopy(self)
-            for name in fiducials_to_return.names():
-                point = fiducials_to_return.query(name)
-                transformed_point = sitk_transform.TransformPoint(point)
-                fiducials_to_return.set(name, np.array(transformed_point))
-            return fiducials_to_return
+            write_to = deepcopy(self)
+
+        for name in write_to.names():
+            point = write_to.query(name)
+            transformed_point = sitk_transform.TransformPoint(point)
+            write_to.set(name, np.array(transformed_point))
+
+        if not inplace:
+            return write_to
 
     def write(self, name: str, format: Format = None) -> None:
         """
